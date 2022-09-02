@@ -1,11 +1,8 @@
 ---
 description: Create a sandbox
 inputs:
-  image_name:
-    description: The name of the image build to be deployed
-    required: true
-  image_tag:
-    description: The tag of the image build to be deployed
+  image:
+    description: The name and tag of the image build to be deployed
     required: true
   response_file:
     default: .signadot/response.yml
