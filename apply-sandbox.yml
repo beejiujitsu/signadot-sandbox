@@ -1,5 +1,5 @@
 ---
-description: Create a sandbox
+description: Apply Signadot Sandbox
 inputs:
   image:
     description: The name and tag of the image build to be deployed
@@ -23,12 +23,11 @@ inputs:
     default: ${{ github.workspace }}/.signadot/template.yml
     description: The template file to use for the sandbox; defaults to .signadot/template.yaml
     required: true
-name: Signadot Sandbox
-outputs:
-  time:
-    description: The time we greeted you
+name: Apply Sandbox
 runs:
   args:
+    - run
+    - signadot/signadot-cli:${{ inputs.signadot_cli_tag }}
     - /signadot
     - sandbox
     - apply
