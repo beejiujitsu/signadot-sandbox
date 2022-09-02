@@ -1,12 +1,12 @@
 ---
-description: Apply Signadot Sandbox
+description: Apply Sandbox
 inputs:
   image:
     description: The name and tag of the image build to be deployed
     required: true
   response_file:
     default: ${{ github.workspace }}/.signadot/response.yml
-    description: The response file to store created sandbox details; defaults to .signadot/response.yml
+    description: The response file to output to; defaults to .signadot/response.yml
     required: true
   signadot_api_key:
     default: ${{ secrets.SIGNADOT_API_KEY }}
@@ -21,9 +21,9 @@ inputs:
     required: true
   template_file:
     default: ${{ github.workspace }}/.signadot/template.yml
-    description: The template file to use for the sandbox; defaults to .signadot/template.yaml
+    description: The file to use with action
     required: true
-name: Apply Sandbox
+name: signadot sandbox
 runs:
   args:
     - run
@@ -32,7 +32,9 @@ runs:
     - sandbox
     - apply
     - '-f'
-    - ${{ inputs.template_file }}
+    - ${{ inputs.file }}
+    - '>'
+    - ${{ inputs.file}}
   env:
     SIGNADOT_API_KEY: ${{ inputs.signadot_api_key }}
     SIGNADOT_ORG: ${{ inputs.signadot_org }}
