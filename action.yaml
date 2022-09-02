@@ -26,15 +26,15 @@ inputs:
 name: signadot sandbox
 runs:
   args:
-    - run
-    - signadot/signadot-cli:${{ inputs.signadot_cli_tag }}
     - /signadot
     - sandbox
     - apply
     - '-f'
-    - ${{ inputs.file }}
+    - ${{ inputs.template_file }}
+    - '-o'
+    - yaml
     - '>'
-    - ${{ inputs.file}}
+    - ${{ inputs.response_file}}
   env:
     SIGNADOT_API_KEY: ${{ inputs.signadot_api_key }}
     SIGNADOT_ORG: ${{ inputs.signadot_org }}
