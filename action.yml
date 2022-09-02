@@ -1,16 +1,34 @@
-# action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+---
+description: Create, test, and delete a Signadot sandbox
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  action:
+    default: create
+    description: Signadot action to perform
     required: true
-    default: 'World'
+  response_file:
+    default: .signadot/response.yml
+    description: The response file to store created sandbox details; defaults to .signadot/response.yml
+    required: true
+  sha:
+    description: The commit SHA of the image build to be deployed
+    required: true
+  signadot_api_key:
+    default: ${{ secrets.SIGNADOT_API_KEY }}
+    description: The Signadot API Key to use from https://app.signadot.com/settings/apikeys; defaults to secrets.SIGNADOT_API_KEY
+    required: true
+  signadot_org:
+    description: The Signadot Organization Name to use from https://app.signadot.com/settings/global
+    required: true
+  template_file:
+    default: .signadot/template.yml
+    description: The template file to use for the sandbox; defaults to .signadot/template.yaml
+    required: true
+name: Signadot Sandbox
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  time:
+    description: The time we greeted you
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
   args:
     - ${{ inputs.who-to-greet }}
+  image: Dockerfile
+  using: docker
