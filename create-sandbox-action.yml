@@ -5,7 +5,7 @@ inputs:
     description: The name and tag of the image build to be deployed
     required: true
   response_file:
-    default: .signadot/response.yml
+    default: ${{ github.workspace }}/.signadot/response.yml
     description: The response file to store created sandbox details; defaults to .signadot/response.yml
     required: true
   signadot_api_key:
@@ -20,7 +20,7 @@ inputs:
     description: The Signadot Organization Name to use from https://app.signadot.com/settings/global
     required: true
   template_file:
-    default: .signadot/template.yml
+    default: ${{ github.workspace }}/.signadot/template.yml
     description: The template file to use for the sandbox; defaults to .signadot/template.yaml
     required: true
 name: Signadot Sandbox
