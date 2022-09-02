@@ -1,0 +1,33 @@
+---
+description: Delete Signadot sandbox
+inputs:
+  response_file:
+    default: ${{ github.workspace }}/.signadot/response.yml
+    description: The response file to store created sandbox details; defaults to .signadot/response.yml
+    required: true
+  signadot_api_key:
+    default: ${{ secrets.SIGNADOT_API_KEY }}
+    description: The Signadot API Key to use from https://app.signadot.com/settings/apikeys; defaults to secrets.SIGNADOT_API_KEY
+    required: true
+  signadot_cli_tag:
+    default: latest
+    description: The signadot/signadot-cli Docker image tag to use; defaults to latest
+    required: true
+  signadot_org:
+    description: The Signadot Organization Name to use from https://app.signadot.com/settings/global
+    required: true
+name: Delete Sandbox
+runs:
+  args:
+    - run
+    - signadot/signadot-cli:${{ inputs.signadot_cli_tag }}
+    - /signadot
+    - sandbox
+    - delete
+    - '-f'
+    - ${{ inputs.response_file }}
+  env:
+    SIGNADOT_API_KEY: ${{ inputs.signadot_api_key }}
+    SIGNADOT_ORG: ${{ inputs.signadot_org }}
+  image: signadot/signadot-cli:${{ inputs.signadot_cli_tag }}
+  using: docker
